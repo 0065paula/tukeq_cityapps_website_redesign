@@ -1,0 +1,237 @@
+@import "normalize";
+@import "compass";
+
+@include normalize;
+
+// It is also possible to use only parts of normalize.css, i.e.:
+// 
+// @include normalize-html5;
+// @include normalize-base;
+// @include normalize-links;
+// 
+// ...
+
+
+// Start customized style
+
+/* Variables & Mixins*/
+
+/* Color */
+
+$bg-gray:#e9ebed;
+$dark:#3c3e45;
+$medium:#515151;
+$blue:#2c83da;
+$bright-blue:#00a2ff;
+
+/* Typography */
+$font:"Helvetica Neue","Hiragino Sans GB",Arial,sans-serif; 
+$base-size:18px;
+
+@mixin white-text-shadow{
+	text-shadow: 0 1px rgba(255,255,255,.3);
+}
+
+@mixin white-text-shadow-strong{
+	text-shadow: 0 1px rgba(255,255,255,.7);
+}
+
+/* Layout */
+@mixin full-width-960 {
+	width: 100%;
+	min-width: 960px;
+}
+
+// @mixin center($item-width,$h-padding:0)
+// {
+// 	position:absolute;
+// 	left:50%;
+// 	margin-left: -($item-width + $h-padding)/2;
+// }
+
+/* Style */
+
+body {
+	background-color: $bg-gray;
+	font-family:$font;
+	color:$dark;
+	font-size:$base-size;
+	@include full-width-960;
+	padding:0;
+	margin:0;
+	@media screen and (max-width: 580px) {
+		font-size:$base-size/1.4;
+		min-width: 1px;
+		max-width: 580px;
+	}
+}
+
+
+
+a {
+	@include unstyled-link;
+}
+
+header {
+	margin:0;
+	// margin-top:-50px;
+	// @include full-width-960;
+}
+
+.big-image{
+	// width: 100%;
+	padding: 60px 0;
+	height: 210px;
+    background:(url('../img/Header_bg.png') $blue no-repeat);
+    background-position: 50% 50%;
+    background-size: cover;
+    @include full-width-960;
+    @media screen and (max-width:580px){
+    	background:$bright-blue;
+		height: 136px;
+		padding: 10px 0;
+		width:100%;
+		min-width:1px;
+		max-width:580px
+    }
+}
+
+
+.block{
+	// @include center(292px);
+	@include border-radius(8px);
+	width: 292px;
+	height: 180px;
+	background-color: rgba(255,255,255,.6);
+	border: solid 1px rgba(255,255,255,.8);
+    @include box-shadow(rgba(118,116,116,.4) 0 2px 8px);
+    margin:0 auto 0 auto;
+    text-align: center;
+    @include white-text-shadow;
+
+    @media screen and (max-width:580px) {
+    	border:none;
+    	background:none;
+    	@include box-shadow(0 0 0 0);
+    	color:#fff;
+    	text-shadow: 0 2px rgba(90,105,114,.3);
+    	width:100%;
+    }
+
+    h1 {
+	  font-size:2.67em;
+	  margin: 0 auto;
+	  padding: 0 auto;
+	}
+
+	h2 {
+		font-size:1.67em;
+		margin: 10px 0 0 0;
+		padding: 0 auto;
+	}
+
+	h3 {
+	    font-size:0.78em;
+	    margin: 0 auto;
+	    font-weight:300;
+		color:$medium;
+	    em {
+	    	font-style:normal;
+	    	color: $blue;
+	    	margin:0 3px;
+	    	font-weight:500;
+
+	    	@media screen and (max-width:580px){
+	    		color:#262e30;
+	    	}
+	    }
+
+        @media screen and (max-width:580px) {
+	    	color:#262e30;
+            font-size:1em;
+            text-shadow: 0 1px rgba(255,255,255,.3);
+		}
+	}
+}
+
+.splitter {
+	margin:5px auto 10px auto;
+	// padding: 0 auto;
+	width: 252px;
+	height: 1px;
+	background-color: #909090;
+	@include box-shadow(0 1px rgba(255,255,255,.6));
+    @media screen and (max-width:580px) {
+		background-color: #4382a7;
+		@include box-shadow(0 1px rgba(255,255,255,.3));
+	}
+}
+
+
+
+.content {
+	width: 640px;
+	padding: 60px 46px 10px 100px;
+	margin: 44px auto 80px auto;
+	@include border-radius(4px);
+	@include box-shadow(0 2px rgba(174,164,164,.3));
+	background-color:#fff;
+	@media screen and (max-width:580px){
+		margin: 10px auto;
+		width: 282px;
+		padding: 10px 0 20px 20px;
+	}
+	
+	ul {
+		@include no-bullets;
+		@include inline-block-list-container;
+		li {
+			@include inline-block-list-item;
+			margin: 0 54px 50px 0;
+			@media screen and (max-width:580px){
+				margin: 0 16px 20px 0px;
+			}
+			a {
+				img {
+					width: 100px;
+					height: 100px;
+					@include border-radius(20px);
+					border: 1px solid scale-lightness($medium,60);
+					@media screen and (max-width:580px){
+						width:72px;
+						height:72px;
+						@include border-radius(14.4px);
+					}
+				}
+
+				p {
+					margin:5px auto;
+					text-align: center;
+				}
+			}
+
+			a:hover {
+				p{
+					color:$blue;
+				}
+				img {
+					@include box-shadow(0 2px 5px rgba(174,164,164,.3));
+					margin-top:-2px;
+				}
+			}
+
+		}
+	}
+}
+
+.footer{
+	text-align:center;
+	margin: 0 auto 20px auto;
+	font-size:12px;
+	color:scale-lightness($medium,30);
+	@include white-text-shadow-strong;
+	.footer-splitter {
+		display: none;
+	}
+}
+
